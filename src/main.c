@@ -5,11 +5,12 @@
 #include "Connect_Wifi/wifi.h"
 #include "Client handler/esp_client.h"
 #include "nvs_flash.h"
-#include "CT sensor/ctsensor0.h"
+
 
 static const char *TAG = "MAIN";
 void app_main()
 {
+
     esp_err_t err = nvs_flash_init();
     if (err == ESP_ERR_NVS_NO_FREE_PAGES || err == ESP_ERR_NVS_NEW_VERSION_FOUND)
     {
@@ -33,26 +34,34 @@ void app_main()
     wifi_apsta(CONFIG_STA_CONNECT_TIMEOUT * 1000);
 
 #endif
-    // while (1)
-    // {
-    //     send_data();
-    //     vTaskDelay(1000 / portTICK_RATE_MS);
-    // }
-
-    esp_adc_cal_characterize(ADC_UNIT_1, ADC_ATTEN_DB_11, ADC_WIDTH_BIT_DEFAULT, 0, &adc1_chars);
-
-    adc1_config_width(ADC_WIDTH_BIT_DEFAULT);
-    adc1_config_channel_atten(ADC1_CHANNEL_4, ADC_ATTEN_DB_11);
-    uint32_t voltage;
-
     while (1)
     {
-        int adc_value = adc1_get_raw(ADC1_CHANNEL_4);
-        voltage = esp_adc_cal_raw_to_voltage(adc_value, &adc1_chars);
-        printf("Voltage: %d mV", voltage);
-        printf("\n");
-        vTaskDelay(500 / portTICK_PERIOD_MS);
         send_data();
         vTaskDelay(1000 / portTICK_RATE_MS);
     }
+
+
+
+    // adc1_config_width(ADC_WIDTH);
+    // adc1_config_channel_atten(ADC_CHANNEL, ADC_ATTEN_DB_0);
+
+
+    // esp_adc_cal_characterize(ADC_UNIT_1, ADC_ATTEN_DB_11, ADC_WIDTH_BIT_DEFAULT, 0, &adc1_chars);
+
+    // adc1_config_width(ADC_WIDTH_BIT_DEFAULT);
+    // adc1_config_channel_atten(ADC1_CHANNEL_4, ADC_ATTEN_DB_11);
+    // uint32_t voltage;
+
+    // while (1)
+    // {
+    //     uint32_t adc_reading = adc1_get_raw(ADC_CHANNEL);
+    //     float voltage = (float)adc_reading / 4096 * 3.3;
+    //     // int adc_value = adc1_get_raw(ADC1_CHANNEL_4);
+    //     // voltage = esp_adc_cal_raw_to_voltage(adc_value, &adc1_chars);
+    //     printf("Voltage: %f mV", voltage);
+    //     printf("\n");
+    //     vTaskDelay(500 / portTICK_PERIOD_MS);
+    //     send_data();
+    //     vTaskDelay(1000 / portTICK_RATE_MS);
+    // }
 }

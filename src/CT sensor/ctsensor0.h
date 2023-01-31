@@ -10,9 +10,10 @@
 #include "freertos/task.h"
 #include "driver/adc.h"
 #include "esp_adc_cal.h"
-
-
-static esp_adc_cal_characteristics_t adc1_chars;
-
+#define ADC_CHANNEL ADC1_CHANNEL_4
+#define ADC_WIDTH ADC_WIDTH_BIT_12
+#define ACrange 120;
+// static esp_adc_cal_characteristics_t adc1_chars;
+extern float readACcurrentValue();
 
 #endif

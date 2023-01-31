@@ -34,7 +34,9 @@
         "time.h": "c",
         "emonlib.h": "c",
         "adc.h": "c",
-        "ctsensor0.h": "c"
+        "ctsensor0.h": "c",
+        "esp_system.h": "c",
+        "future": "c"
     },
     "idf.adapterTargetName": "esp32",
     "idf.openOcdConfigs": [
